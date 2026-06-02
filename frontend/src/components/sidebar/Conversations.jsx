@@ -1,0 +1,23 @@
+import Conversation from './Coversation'
+const Conversations = () => {
+	return (
+		<div className='py-2 flex flex-col overflow-auto'>
+			<Conversation />
+			<Conversation />
+
+		</div>
+	);
+};
+export default Conversations;
+
+// import Conversation from './Coversation'
+// const Conversations = () => {
+// 	return (
+// 		<div className='py-2 flex flex-col overflow-auto'>
+// 			<Conversation />
+// 			<Conversation />
+
+// 		</div>
+// 	);
+// };
+// export default Conversations;

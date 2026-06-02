@@ -4,8 +4,8 @@ import generateTokenAndSetCookie from "../utils/generateToken.js";
 
 export const signup = async (req, res) => {
   try {
-    const { fullName, username, passWord, confirmPassword, gender } = req.body;
-    if (passWord !== confirmPassword) {
+    const { fullName, username, password, confirmPassword, gender } = req.body;
+    if (password !== confirmPassword) {
       return res.status(400).json({ error: "passwords don't match" })
     }
     const user = await User.findOne({ username })
@@ -15,7 +15,7 @@ export const signup = async (req, res) => {
     }
 
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(passWord, salt);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     const boyProfilePic = "https://api.dicebear.com/10.x/dylan/svg?seed=${username}";
 
@@ -24,7 +24,7 @@ export const signup = async (req, res) => {
     const newUser = new User({
       fullName,
       username,
-      passWord: hashedPassword,
+      password: hashedPassword,
       gender,
       profilePic: gender === "male" ? boyProfilePic : girlProfilePic
     })
@@ -52,9 +52,9 @@ export const signup = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const { username, passWord } = req.body;
+    const { username, password } = req.body;
     const user = await User.findOne({ username });
-    const isPasswordCorrect = await bcrypt.compare(passWord, user?.passWord || ""); //If user is null or undefined → return undefined user?
+    const isPasswordCorrect = await bcrypt.compare(password, user?.password || ""); //If user is null or undefined → return undefined user?
 
     if (!user || !isPasswordCorrect) {
       return res.status(400).json({ error: "Invalid username or password" });
