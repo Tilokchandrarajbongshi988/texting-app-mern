@@ -1,75 +1,111 @@
-
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import useLogin from "../../components/hooks/useLogin"
 const Login = () => {
-  return (
-    <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
-      <div className="w-full p-6 rounded-lg shadow-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
-      <h1 className="text-3xl font-semibold text-center text-gray-300">Login
-          <span className="text-blue-500">
-             ChatApp
-          </span>
-      </h1>
-      <form action="">
-        <div>
-          <label htmlFor="" className="label p-2">
-            <span className="text-base label-text">Username</span>
-          </label>
-          <input type="text" placeholder="Enter username" className="w-full input input-bordered h-10"/>
-        </div>
-        <div>
-          <label htmlFor="" className="label">
-            <span className="text-base label-text">PassWord</span>
-          </label>
-          <input type="password" placeholder="Enter PassWord" className="w-full input input-bordered h-10"/>
-        </div>
-        <a href="#" className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block">"Dont't" have an account?</a>
-        <div>
-          <button className="btn btn-block btn-sm mt-2">Login</button>
-        </div>
-      </form>
-      </div>
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
 
-    </div>
-  )
-}
+	const { loading, login } = useLogin();
 
-export default Login
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		await login(username, password);
+	};
 
+	return (
+		<div className='flex flex-col items-center justify-center min-w-96 mx-auto'>
+			<div className='w-full p-6 rounded-lg shadow-md  bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
+				<h1 className='text-3xl font-semibold text-center text-gray-300'>
+					Login
+					<span className='text-blue-500'> ChatApp</span>
+				</h1>
 
+				<form onSubmit={handleSubmit}>
+					<div>
+						<label className='label p-2'>
+							<span className='text-base label-text'>Username</span>
+						</label>
+						<input
+							type='text'
+							placeholder='Enter username'
+							className='w-full input input-bordered h-10'
+							value={username}
+							onChange={(e) => setUsername(e.target.value)}
+						/>
+					</div>
 
+					<div>
+						<label className='label'>
+							<span className='text-base label-text'>Password</span>
+						</label>
+						<input
+							type='password'
+							placeholder='Enter Password'
+							className='w-full input input-bordered h-10'
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+						/>
+					</div>
+					<Link to='/signup' className='text-sm  hover:underline hover:text-blue-600 mt-2 inline-block'>
+						{"Don't"} have an account?
+					</Link>
 
+					<div>
+						<button className='btn btn-block btn-sm mt-2' disabled={loading}>
+							{loading ? <span className='loading loading-spinner '></span> : "Login"}
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	);
+};
+export default Login;
 
-//starter code for this file
-// const Login = () => {
-//   return (
-//     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
-//       <div className="w-full p-6 rounded-lg shadow-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
-//       <h1 className="text-3xl font-semibold text-center text-gray-300">Login
-//           <span className="text-blue-500">
-//              ChatApp
-//           </span>
-//       </h1>
-//       <form action="">
-//         <div>
-//           <label htmlFor="" className="label p-2">
-//             <span className="text-base label-text">Username</span>
-//           </label>
-//           <input type="text" placeholder="Enter username" className="w-full input input-bordered h-10"/>
-//         </div>
-//         <div>
-//           <label htmlFor="" className="label">
-//             <span className="text-base label-text">PassWord</span>
-//           </label>
-//           <input type="password" placeholder="Enter PassWord" className="w-full input input-bordered h-10"/>
-//         </div>
-//         <a href="#" className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block">"Dont't" have an account?</a>
-//         <div>
-//           <button className="btn btn-block btn-sm mt-2">Login</button>
-//         </div>
-//       </form>
-//       </div>
+/*
+LOGIN FLOW
 
-//     </div>
-//   )
-// }
+1. User enters username and password in Login.jsx
+   -> onChange updates the username and password state.
 
-// export default Login
+2. User clicks the Login button.
+   -> Form onSubmit triggers handleSubmit().
+
+3. handleSubmit()
+   -> prevents page refresh with e.preventDefault()
+   -> calls login(username, password) from useLogin hook.
+
+4. useLogin -> login()
+   -> validates inputs using handleInputErrors()
+   -> if fields are empty, shows toast error and stops.
+
+5. If validation passes:
+   -> setLoading(true) shows loading spinner.
+
+6. Sends POST request to:
+   -> /api/auth/login
+   with username and password in request body.
+
+7. Backend verifies credentials and returns user data.
+
+8. If backend returns an error:
+   -> throw Error()
+   -> catch block shows toast error message.
+
+9. If login succeeds:
+   -> save user data in localStorage ("chat-user")
+   -> setAuthUser(data) updates AuthContext.
+
+10. AuthContext updates:
+    -> authUser is no longer null
+    -> app knows user is logged in
+    -> protected routes/components can render.
+
+11. finally block runs:
+    -> setLoading(false)
+    -> spinner disappears.
+
+Summary:
+Login.jsx = UI (form, inputs, button)
+useLogin.js = Authentication logic (validation, API call, localStorage, AuthContext)
+*/
