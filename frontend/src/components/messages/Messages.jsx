@@ -2,10 +2,12 @@ import { useEffect, useRef } from "react";
 import MessageSkeleton from "../skeletons/MessageSkeleton";
 import Message from "./Message";
 import useGetMessages from "../hooks/useGetMessages";
+import useListenMessages from "../hooks/useListenMessages";
 
 
 const Messages = () => {
    const { messages, loading } = useGetMessages();
+   useListenMessages()
    const lastMessageRef = useRef();
    // lastMessageRef stores a reference to the latest message div.
 // Since the same ref is attached to every message, React keeps

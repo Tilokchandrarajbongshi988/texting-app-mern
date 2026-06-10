@@ -1,5 +1,7 @@
 import Conversation from "../models/conversation.model.js";
 import Message from "../models/message.model.js";
+import { getReceiverSocketId, io } from "../socket/socket.js";
+
 
 export const sendMessage = async (req, res) => {
   try {
@@ -33,6 +35,13 @@ export const sendMessage = async (req, res) => {
     }
     //run in parallel
     await Promise.all([conversation.save(), newMessage.save()]);
+    const receiverSocketId = getReceiverSocketId(receiverId);
+		if (receiverSocketId) {
+			// io.to(<socket_id>).emit() used to send events to specific client
+			io.to(receiverSocketId).emit("newMessage", newMessage);
+		}
+
+
     res.status(201).json(newMessage);
     // what is happening here is after it saves the  sender id and the receiver id the message section of the conversation. message remains empty then when the Message schema is called to create a new object  it saves the original message came from the front end not the id then after creating the object it stores in the memory for now not yet saved on the collection of Message then it checks if the newMessage variable contains data which is true it pushes the _id which got created from the new Message and this _id was given by the mongo but remember it hs not saved yet then it pushes the id to the conversation.message secction then it saves both the collections at once / reason for doing this is not to make the conversation. mesage section mesy with the messages
   } catch (error) {
