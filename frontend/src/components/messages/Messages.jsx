@@ -4,42 +4,33 @@ import Message from "./Message";
 import useGetMessages from "../hooks/useGetMessages";
 import useListenMessages from "../hooks/useListenMessages";
 
-
 const Messages = () => {
-   const { messages, loading } = useGetMessages();
-   useListenMessages()
-   const lastMessageRef = useRef();
-   // lastMessageRef stores a reference to the latest message div.
-// Since the same ref is attached to every message, React keeps
-// overwriting it during the map loop, so after rendering it points
-// to the last (newest) message.
-//
-// When the messages array changes, the component re-renders first,
-// the ref gets updated to the newest message div, and then useEffect
-// runs. We use scrollIntoView() to automatically scroll the chat
-// to the latest message.
-   useEffect(() => {
-      setTimeout(() => {
-         lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
-      }, 100);
-   }, [messages]);
+  const { messages, loading } = useGetMessages();
+  useListenMessages();
+  const lastMessageRef = useRef();
 
-   return (
-      <div className='px-4 flex-1 overflow-auto'>
-         {!loading &&
-            messages.length > 0 &&
-            messages.map((message) => (
-               <div key={message._id} ref={lastMessageRef}>
-                  <Message message={message} />
-               </div>
-            ))}
+  useEffect(() => {
+    setTimeout(() => {
+      lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  }, [messages]);
 
-       
-         {loading && [...Array(3)].map((_, idx) => <MessageSkeleton key={idx} />)}
-         {!loading && messages.length === 0 && (
-            <p className='text-center'>Send a message to start the conversation</p>
-         )}
-      </div>
-   );
+  return (
+    <div className="px-4 flex-1 overflow-auto">
+      {!loading &&
+        messages.length > 0 &&
+        messages.map((message) => (
+          <div key={message._id} ref={lastMessageRef}>
+            <Message message={message} />
+          </div>
+        ))}
+
+      {loading && [...Array(3)].map((_, idx) => <MessageSkeleton key={idx} />)}
+      {!loading && messages.length === 0 && (
+        <p className="text-center">Send a message to start the conversation</p>
+      )}
+    </div>
+  );
 };
+
 export default Messages;
