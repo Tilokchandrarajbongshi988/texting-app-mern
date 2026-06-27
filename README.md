@@ -1,8 +1,8 @@
 # Real-Time Chat Application
 
-A full-stack MERN real-time chat application where users can create an account, log in, view other users, and send private messages in real time.
+A full-stack MERN chat application where users can create an account, log in, see available users, check who is online, and exchange private messages in real time.
 
-The app uses Socket.IO for live messaging and online user status, JWT cookies for authentication, MongoDB for storing users/conversations/messages, and React for the frontend UI.
+The app is live online, so real-time messaging can be tested from two browser windows or two different devices. When one user sends a message, the other user receives it instantly through Socket.IO without refreshing the page.
 
 ## Live Demo
 
@@ -10,20 +10,39 @@ The app uses Socket.IO for live messaging and online user status, JWT cookies fo
 
 Note: This app is hosted on Render's free plan, so the first load may take a few seconds if the server was inactive.
 
+## Screenshots
+
+### Login Page
+![Login Page](./screenshots/login-page.png)
+
+### Real-Time Chat Between Two Users
+![Real-Time Chat Between Two Users](./screenshots/real-time-chat.png)
+
+## Project Summary
+
+This project demonstrates a complete private messaging workflow. A user signs up or logs in, the backend creates a JWT cookie, protected routes load other users and conversations, and Socket.IO keeps both sides connected for live message delivery.
+
+The chat interface separates sent and received messages visually, shows online users in the sidebar, plays a notification sound for incoming messages, and automatically scrolls to the latest message.
+
 ## Features
 
-- User signup and login
-- JWT authentication with cookies
-- Protected chat routes
-- Real-time private messaging with Socket.IO
-- Online user indicator
-- Conversation sidebar
+- User signup, login, and logout
+- JWT authentication stored in HTTP cookies
+- Protected backend routes for users and messages
+- Private one-to-one conversations
+- Real-time message delivery with Socket.IO
+- Online user tracking with live sidebar status
 - Search users by name
+- Sent messages shown on the right and received messages shown on the left
+- Different message bubble colors for sender and receiver
+- Incoming message shake animation
 - Message sound notification
 - Auto-scroll to the latest message
-- Responsive chat UI
-- MongoDB database for users, conversations, and messages
-- Production setup for Render deployment
+- Random profile avatars generated during signup
+- Toast messages for validation and API feedback
+- Responsive React chat UI
+- MongoDB storage for users, conversations, and messages
+- Production deployment setup for Render
 
 ## Tech Stack
 
@@ -73,6 +92,7 @@ Chatapplicationproject/
 |   |   |-- utils/
 |   |   `-- zustand/
 |   `-- vite.config.js
+|-- screenshots/
 |-- package.json
 `-- README.md
 ```
@@ -130,6 +150,8 @@ The frontend runs on:
 http://localhost:5173
 ```
 
+If PowerShell blocks `npm`, run the same commands with `npm.cmd`.
+
 ## API Routes
 
 ### Auth
@@ -152,6 +174,17 @@ GET /api/users
 GET  /api/messages/:id
 POST /api/messages/send/:id
 ```
+
+## How It Works
+
+1. A user signs up or logs in.
+2. The backend hashes passwords with bcrypt and creates a JWT cookie.
+3. Protected routes verify the cookie before returning users or messages.
+4. The frontend connects to Socket.IO with the logged-in user's ID.
+5. The server stores each connected user's socket ID.
+6. When a message is sent, it is saved in MongoDB.
+7. If the receiver is online, Socket.IO emits the message directly to that user.
+8. The receiver sees the new message instantly with a notification sound.
 
 ## Deployment
 
@@ -181,22 +214,13 @@ NODE_ENV=production
 
 Render automatically provides the `PORT`.
 
-## How It Works
-
-- A user signs up or logs in.
-- The backend creates a JWT token and stores it in a cookie.
-- Protected routes verify the cookie before returning users or messages.
-- When a user logs in, the frontend connects to Socket.IO.
-- The server tracks online users with their socket IDs.
-- When a message is sent, it is saved in MongoDB and emitted to the receiver in real time.
-
 ## Future Improvements
 
-- Add typing indicator
+- Add typing indicators
 - Add message seen/read status
 - Add image and file sharing
 - Add group chats
-- Add profile update feature
+- Add user profile editing
 - Add password reset
 - Improve mobile layout
 
