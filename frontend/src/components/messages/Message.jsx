@@ -5,7 +5,8 @@ import { extractTime } from "../../utils/extractTime";
 const Message = ({ message }) => {
   const { authUser } = useAuthContext();
   const { selectedConversation } = useConversation();
-  const fromMe = message.senderId === authUser._id;
+  const senderId = message.senderId?._id || message.senderId;
+  const fromMe = String(senderId) === String(authUser?._id);
   const formattedTime = extractTime(message.createdAt);
   const chatClassName = fromMe ? "chat-end" : "chat-start";
   const profilePic = fromMe ? authUser.profilePic : selectedConversation?.profilePic;
