@@ -14,11 +14,11 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
-      <div className="w-full p-6 rounded-lg shadow-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
-        <h1 className="text-3xl font-semibold text-center text-gray-300">
+    <div className="mx-auto flex min-h-screen max-w-md flex-col items-center justify-center px-4">
+      <div className="w-full rounded-xl border-2 border-black bg-white p-6">
+        <h1 className="text-center text-3xl font-semibold text-black">
           Login
-          <span className="text-blue-500"> ChatApp</span>
+          <span className="text-black"> ChatApp</span>
         </h1>
 
         <form onSubmit={handleSubmit}>
@@ -29,7 +29,7 @@ const Login = () => {
             <input
               type="text"
               placeholder="Enter username"
-              className="w-full input input-bordered h-10"
+              className="input input-bordered h-10 w-full border-2 border-black bg-white text-black"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -42,17 +42,17 @@ const Login = () => {
             <input
               type="password"
               placeholder="Enter Password"
-              className="w-full input input-bordered h-10"
+              className="input input-bordered h-10 w-full border-2 border-black bg-white text-black"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <Link to="/signup" className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block">
+          <Link to="/signup" className="mt-2 inline-block text-sm font-medium text-black hover:underline">
             {"Don't"} have an account?
           </Link>
 
           <div>
-            <button className="btn btn-block btn-sm mt-2" disabled={loading}>
+            <button className="btn btn-block btn-sm mt-2 border-2 border-black bg-yellow-300 text-black hover:bg-yellow-200" disabled={loading}>
               {loading ? <span className="loading loading-spinner"></span> : "Login"}
             </button>
           </div>

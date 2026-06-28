@@ -2,10 +2,7 @@
 @plugin "daisyui";
 
 body {
-  background: url("/ice.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  background: #fef9c3;
 }
 
 .shake {
