@@ -7,6 +7,7 @@ import SearchInput from "./SearchInput";
 const Sidebar = () => {
 	const [showProfile, setShowProfile] = useState(false);
 	const { authUser } = useAuthContext();
+	const gender = authUser.gender || "Not available";
 
 	return (
 		<div className="flex w-80 flex-col border-r-2 border-black bg-white p-4">
@@ -69,7 +70,7 @@ const Sidebar = () => {
 								</p>
 								<p className="mt-2">
 									<span className="font-semibold">Gender:</span>{" "}
-									{authUser.gender}
+									{gender}
 								</p>
 							</div>
 						</div>
