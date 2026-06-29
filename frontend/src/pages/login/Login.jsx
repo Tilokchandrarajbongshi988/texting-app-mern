@@ -15,6 +15,12 @@ const Login = () => {
 
   return (
     <div className="mx-auto flex min-h-screen max-w-md flex-col items-center justify-center px-4">
+      <div className="fixed right-4 top-4 z-10 rounded-xl border-2 border-black bg-white p-4 text-left text-sm text-black shadow-md">
+        <p className="font-bold">Try the features</p>
+        <p>Username: demo1</p>
+        <p>Password: Demo12345</p>
+      </div>
+
       <div className="w-full rounded-xl border-2 border-black bg-white p-6">
         <h1 className="text-center text-3xl font-semibold text-black">
           Login

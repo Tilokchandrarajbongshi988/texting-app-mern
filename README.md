@@ -8,6 +8,13 @@ The app is live online, so real-time messaging can be tested from two browser wi
 
 [View Live App](https://texting-app-mern-4.onrender.com/)
 
+Demo login:
+
+```txt
+Username: demo1
+Password: Demo12345
+```
+
 Note: This app is hosted on Render's free plan, so the first load may take a few seconds if the server was inactive.
 
 ## Screenshots
@@ -24,6 +31,9 @@ Note: This app is hosted on Render's free plan, so the first load may take a few
 ### Chat Screen
 ![Chat Screen](./screenshots/chat-screen.png)
 
+### Reset Password
+![Reset Password](./screenshots/reset-password.png)
+
 ## Project Summary
 
 This project demonstrates a complete private messaging workflow. A user signs up or logs in, the backend creates a JWT cookie, protected routes load other users and conversations, and Socket.IO keeps both sides connected for live message delivery.
@@ -34,6 +44,7 @@ The chat interface separates sent and received messages visually, shows online u
 
 - Simple YellowChat landing page with login and signup buttons
 - User signup, login, and logout
+- Beginner-friendly reset password using username and new password
 - JWT authentication stored in HTTP cookies
 - Protected backend routes for users and messages
 - Private one-to-one conversations
