@@ -1,25 +1,28 @@
 const GenderCheckbox = ({ onCheckboxChange, selectedGender }) => {
 	return (
-		<div className='flex'>
+		<div className='mt-3 flex gap-4'>
 			<div className='form-control'>
-				<label className={`label gap-2 cursor-pointer ${selectedGender === "male" ? "selected" : ""}`}>
-					<span className='label-text'>Male</span>
+				<label className='flex cursor-pointer items-center gap-2'>
 					<input
-						type='checkbox'
-						className='checkbox border-black'
+						type='radio'
+						name='gender'
+						className='radio radio-sm border-2 border-black checked:bg-yellow-300'
 						checked={selectedGender === "male"}
-						onChange={() => onCheckboxChange("male")} />
+						onChange={() => onCheckboxChange("male")}
+					/>
+					<span className='text-base font-medium text-black'>Male</span>
 				</label>
 			</div>
 			<div className='form-control'>
-				<label className={`label gap-2 cursor-pointer ${selectedGender === "female" ? "selected" : ""}`}>
-					<span className='label-text'>Female</span>
+				<label className='flex cursor-pointer items-center gap-2'>
 					<input
-						type='checkbox'
-						className='checkbox border-black'
+						type='radio'
+						name='gender'
+						className='radio radio-sm border-2 border-black checked:bg-yellow-300'
 						checked={selectedGender === "female"}
 						onChange={() => onCheckboxChange("female")}
 					/>
+					<span className='text-base font-medium text-black'>Female</span>
 				</label>
 			</div>
 		</div>
