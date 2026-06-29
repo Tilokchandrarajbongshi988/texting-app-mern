@@ -1,4 +1,4 @@
-# Real-Time Chat Application
+# YellowChat
 
 A full-stack MERN chat application where users can create an account, log in, see available users, check who is online, and exchange private messages in real time.
 
@@ -12,11 +12,17 @@ Note: This app is hosted on Render's free plan, so the first load may take a few
 
 ## Screenshots
 
-### Login Page
-![Login Page](./screenshots/login-page.png)
+### Landing Page
+![Landing Page](./screenshots/landing-page.png)
 
-### Real-Time Chat Between Two Users
-![Real-Time Chat Between Two Users](./screenshots/real-time-chat.png)
+### Chat In Two Browser Windows
+![Chat In Two Browser Windows](./screenshots/two-user-chat.png)
+
+### User Profile Modal
+![User Profile Modal](./screenshots/profile-modal.png)
+
+### Chat Screen
+![Chat Screen](./screenshots/chat-screen.png)
 
 ## Project Summary
 
@@ -26,6 +32,7 @@ The chat interface separates sent and received messages visually, shows online u
 
 ## Features
 
+- Simple YellowChat landing page with login and signup buttons
 - User signup, login, and logout
 - JWT authentication stored in HTTP cookies
 - Protected backend routes for users and messages
@@ -33,8 +40,10 @@ The chat interface separates sent and received messages visually, shows online u
 - Real-time message delivery with Socket.IO
 - Online user tracking with live sidebar status
 - Search users by name
+- User profile modal with avatar, full name, username, and gender
 - Sent messages shown on the right and received messages shown on the left
 - Different message bubble colors for sender and receiver
+- Yellow themed chat interface with bold black borders
 - Incoming message shake animation
 - Message sound notification
 - Auto-scroll to the latest message
