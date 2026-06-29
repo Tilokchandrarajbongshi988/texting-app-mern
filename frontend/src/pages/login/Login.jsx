@@ -50,6 +50,10 @@ const Login = () => {
           <Link to="/signup" className="mt-2 inline-block text-sm font-medium text-black hover:underline">
             {"Don't"} have an account?
           </Link>
+          <br />
+          <Link to="/forgot-password" className="mt-1 inline-block text-sm font-medium text-black hover:underline">
+            Forgot password?
+          </Link>
 
           <div>
             <button className="btn btn-block btn-sm mt-2 border-2 border-black bg-yellow-300 text-black hover:bg-yellow-200" disabled={loading}>

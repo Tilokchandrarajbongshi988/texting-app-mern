@@ -1,6 +1,7 @@
 import "./index.css";
 import Home from "./pages/home/Home";
 import Landing from "./pages/landing/Landing";
+import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
 import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/SignUp";
 import { Route, Routes, Navigate } from "react-router-dom";
@@ -17,6 +18,7 @@ function App() {
         <Route path="/chat" element={authUser ? <Home /> : <Navigate to="/login" />} />
         <Route path="/login" element={authUser ? <Navigate to="/chat" /> : <Login />} />
         <Route path="/signup" element={authUser ? <Navigate to="/chat" /> : <SignUp />} />
+        <Route path="/forgot-password" element={authUser ? <Navigate to="/chat" /> : <ForgotPassword />} />
       </Routes>
       <Toaster />
     </div>

@@ -80,3 +80,37 @@ export const logout = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const resetPassword = async (req, res) => {
+  try {
+    const { username, newPassword, confirmPassword } = req.body;
+
+    if (!username || !newPassword || !confirmPassword) {
+      return res.status(400).json({ error: "Please fill in all fields" });
+    }
+
+    if (newPassword !== confirmPassword) {
+      return res.status(400).json({ error: "Passwords do not match" });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({ error: "Password must be atleast 6 characters" });
+    }
+
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(400).json({ error: "User not found" });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    user.password = hashedPassword;
+    await user.save();
+
+    res.status(200).json({ message: "Password reset successfully" });
+  } catch {
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
