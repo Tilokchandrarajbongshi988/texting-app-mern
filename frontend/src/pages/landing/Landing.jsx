@@ -25,7 +25,7 @@ const Landing = () => {
         </div>
       </div>
 
-      <div className="fixed bottom-4 right-4 rounded-xl border-2 border-black bg-white p-4 text-left text-sm text-black shadow-md">
+      <div className="fixed right-4 top-4 rounded-xl border-2 border-black bg-white p-4 text-left text-sm text-black shadow-md">
         <p className="font-bold">Try the features</p>
         <p>Username: demo1</p>
         <p>Password: Demo12345</p>
