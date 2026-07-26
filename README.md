@@ -6,7 +6,7 @@ The app is live online, so real-time messaging can be tested from two browser wi
 
 ## Live Demo
 
-[View Live App](https://texting-app-mern-4.onrender.com/)
+[View Live App](https://yellow-chat-app.onrender.com)
 
 Demo login:
 
